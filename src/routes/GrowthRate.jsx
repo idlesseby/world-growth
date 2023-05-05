@@ -1,9 +1,7 @@
 import React from 'react'
 
-const GrowthRate = () => {
+export default function GrowthRate() {
   return (
     <div>GrowthRate</div>
   )
 }
-
-export default GrowthRate

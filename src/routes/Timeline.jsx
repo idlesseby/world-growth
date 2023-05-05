@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Timeline = () => {
+export default function Timeline() {
   return (
     <div>Timeline</div>
   )
 }
-
-export default Timeline

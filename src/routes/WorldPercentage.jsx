@@ -1,9 +1,7 @@
 import React from 'react'
 
-const WorldPercentage = () => {
+export default function WorldPercentage() {
   return (
     <div>WorldPercentage</div>
   )
 }
-
-export default WorldPercentage

@@ -61,9 +61,32 @@ button:active {
   border-width: 0;
 }
 
+.header {
+  padding: 1rem;
+  height: 4rem;
+  border-bottom: solid 1px #C4C5D4;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header img {
+  width: 36px;
+  border-radius: 20px;
+  margin-right: 0.5rem;
+}
+
+.header span {
+  font-size: 0.875rem;
+}
+
 #root {
   display: flex;
   height: 100%;
+  width: 100%;
+}
+
+#detail {
   width: 100%;
 }
 
@@ -79,15 +102,6 @@ button:active {
   padding-left: 2rem;
 }
 
-#sidebar > div {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e3e3e3;
-}
-
 #sidebar > h1 {
   font-size: 1.25em;
   font-weight: 500;
@@ -98,7 +112,6 @@ button:active {
   overflow: auto;
   padding-top: 1rem;
 }
-
 
 #sidebar ul {
   padding: 0;

@@ -1,4 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
+import Header from "../components/Header";
 
 export default function Root() {
   return (
@@ -38,6 +39,7 @@ export default function Root() {
         </nav>
       </div>
       <div id="detail">
+        <Header />
         <Outlet />
       </div>
     </>
