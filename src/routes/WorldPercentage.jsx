@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function WorldPercentage() {
   return (
-    <div>WorldPercentage</div>
+    <div className='container'>
+      <div className='content-title'>World Percentage:</div>
+    </div>
   )
 }

@@ -18,7 +18,18 @@ export default function CountryDropdown(props) {
     options.push(option)
   }
 
+  const styles = {
+    control: (styles) => ({...styles, backgroundColor: 'white', width: '10rem', height: '1.875rem',
+    alignContent: 'center', minHeight: 'auto', borderRadius: '10px', fontSize: '0.875em',
+    borderColor: '#C4C5D4', '&:hover': {borderColor: '#5060E9'}, boxShadow: 'none'}),
+    indicatorSeparator: () => ({display: 'none'}),
+    dropdownIndicator: (styles) => ({...styles, color: '#5060E9', '&:hover': {color: '#5060E9'}}),
+    menu: (styles) => ({...styles, width: '16rem'})
+  }
+
   return (
-    <Select options={options} onChange={props.handleChange} defaultValue={{ value: "Germany", label: "Germany"}}/>
+    <Select className='content-dropdown' options={options} onChange={props.handleChange} 
+      defaultValue={{ value: "Germany", label: "Germany"}} styles={styles}
+    />
   )
 }

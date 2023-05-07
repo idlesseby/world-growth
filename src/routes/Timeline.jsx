@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import data from '../data.js'
-import { CartesianGrid, Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import CountryDropdown from '../components/CountryDropdown.jsx'
 
 export default function Timeline() {
@@ -27,35 +27,39 @@ export default function Timeline() {
   }
 
   return <>
-    <div>Timeline</div>
+    <div className='container'>
+      <div className='content-title'>Timeline:</div>
 
-    <CountryDropdown handleChange={handleChange}/>
+      <CountryDropdown handleChange={handleChange}/>
 
-    <ResponsiveContainer width="80%" height="80%">
-      <LineChart data={countryData} 
-        margin={{
-          top: 0,
-          right: 50,
-          left: 50,
-          bottom: 0
-        }}
-      >
-        <CartesianGrid vertical={false} />
-        <XAxis dataKey="Year"/>
-        <YAxis 
-          dataKey="x" 
-          type='number' 
-          label={{ value: 'Population in millions', angle: -90, position: 'insideLeft' }}
-          ticks={selectedCountry === "India" || selectedCountry === "China" ? 
-          [0, 100, 500, 1000, 1700] : 
-          [0, 10, 50, 100, 400]} 
-          domain={selectedCountry === "India" || selectedCountry === "China" ? 
-          [0, 1700] :
-          [0, 400]} 
-        />
-        <Tooltip />
-        <Line type="monotone" dataKey="Population" stroke="#5060E9" fill="#5060E9"/>
-      </LineChart>
-    </ResponsiveContainer>
+      <ResponsiveContainer width="100%" height="70%">
+        <LineChart data={countryData} 
+          margin={{
+            top: 0,
+            right: 50,
+            left: 40,
+            bottom: 0
+          }}
+        >
+          <CartesianGrid vertical={false} />
+          <XAxis dataKey="Year"/>
+          <YAxis 
+            dataKey="x" 
+            type='number' 
+            label={{ value: 'Population in millions', angle: -90, position: 'left' }}
+            ticks={countryData[3].Population > 500 ? [0, 500, 1000, 1500, 2000]
+            : countryData[3].Population > 100 && countryData[0].Population < 500 ? [0, 100, 200, 300, 500]
+            : countryData[3].Population > 10 && countryData[0].Population < 100 ? [0, 10, 30, 50, 100]
+            :[0, 1, 3, 5, 10]} 
+            domain={countryData[3].Population > 500 ? [0, 2000]
+            : countryData[3].Population > 100 && countryData[0].Population < 500 ? [0, 500]
+            : countryData[3].Population > 10 && countryData[0].Population < 100 ? [0, 100]
+            : [0, 10]} 
+          />
+          <Tooltip cursor={{ stroke: '#5060E9' }}/>
+          <Line type="monotone" dataKey="Population" stroke="#5060E9" fill="#5060E9"/>
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   </>
 }
