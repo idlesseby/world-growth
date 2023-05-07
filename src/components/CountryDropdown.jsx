@@ -4,16 +4,16 @@ import data from '../data.js'
 
 export default function CountryDropdown(props) {
 
-  data.countries.sort(function(a, b) {
+  const sortedData = [...data.countries].sort(function(a, b) {
     return a.country.localeCompare(b.country)
   });
 
   const options = []
 
-  for(let i = 0; i < data.countries.length; i++) {
+  for(let i = 0; i < sortedData.length; i++) {
     const option = {
-      value: data.countries[i].country,
-      label: data.countries[i].country
+      value: sortedData[i].country,
+      label: sortedData[i].country
     }
     options.push(option)
   }

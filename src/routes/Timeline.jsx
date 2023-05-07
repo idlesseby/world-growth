@@ -26,6 +26,23 @@ export default function Timeline() {
     countryData.push(popAtYear)
   }
 
+  const CustomTooltip = ({ active, payload, label }) => {
+    console.log(payload[0])
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">Year {`${label}`}</p>
+          <p className="desc">Population:
+            {` ${(payload[0].value > 1 ? (payload[0].value).toFixed(1) : (payload[0].value * 1000).toFixed(1)) }`}
+            {payload[0].value > 1 ? ' million' : ' thousand'}
+          </p>
+        </div>
+      );
+    }
+  
+    return null;
+  };
+
   return <>
     <div className='container'>
       <div className='content-title'>Timeline:</div>
@@ -50,13 +67,16 @@ export default function Timeline() {
             ticks={countryData[3].Population > 500 ? [0, 500, 1000, 1500, 2000]
             : countryData[3].Population > 100 && countryData[0].Population < 500 ? [0, 100, 200, 300, 500]
             : countryData[3].Population > 10 && countryData[0].Population < 100 ? [0, 10, 30, 50, 100]
-            :[0, 1, 3, 5, 10]} 
+            : countryData[3].Population > 1 && countryData[0].Population < 10 ? [0, 1, 3, 5, 10]
+            : [0, 0.1, 0.3, 0.5, 1]} 
             domain={countryData[3].Population > 500 ? [0, 2000]
             : countryData[3].Population > 100 && countryData[0].Population < 500 ? [0, 500]
             : countryData[3].Population > 10 && countryData[0].Population < 100 ? [0, 100]
-            : [0, 10]} 
+            : countryData[3].Population > 1 && countryData[0].Population < 10 ? [0, 10]
+            : [0, 1]} 
           />
-          <Tooltip cursor={{ stroke: '#5060E9' }}/>
+          <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
+            wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,lineHeight: 0.5}}/>
           <Line type="monotone" dataKey="Population" stroke="#5060E9" fill="#5060E9"/>
         </LineChart>
       </ResponsiveContainer>
