@@ -3,7 +3,6 @@ import data from '../data.js'
 import { BarChart, Bar, ResponsiveContainer, CartesianGrid, Tooltip, YAxis } from 'recharts'
 
 const CustomTooltip = ({ active, payload, label }) => {
-  console.log(payload[0])
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
@@ -24,16 +23,16 @@ export default function WorldPercentage() {
       <ResponsiveContainer width="100%" height="70%">
         <BarChart data={data.countries}
           margin={{
-            top: 50,
+            top: 62,
             right: 50,
             left: 40,
             bottom: 0
           }}
         >
           <CartesianGrid vertical={false} />
-          <YAxis label={{ value: 'Population in percent', angle: -90, position: 'left' }}/>
+          <YAxis label={{ value: 'Population in %', angle: -90, position: 'left' }}/>
           <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
-          wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,lineHeight: 0.5}}/>
+          wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,lineHeight: 0.5, backgroundColor: 'white'}}/>
           <Bar dataKey="worldPercentage" fill="#5060E9" />
         </BarChart>
       </ResponsiveContainer>

@@ -27,7 +27,6 @@ export default function Timeline() {
   }
 
   const CustomTooltip = ({ active, payload, label }) => {
-    console.log(payload[0])
     if (active && payload && payload.length) {
       return (
         <div className="custom-tooltip">
@@ -64,19 +63,19 @@ export default function Timeline() {
             dataKey="x" 
             type='number' 
             label={{ value: 'Population in millions', angle: -90, position: 'left' }}
-            ticks={countryData[3].Population > 500 ? [0, 500, 1000, 1500, 2000]
-            : countryData[3].Population > 100 && countryData[0].Population < 500 ? [0, 100, 200, 300, 500]
-            : countryData[3].Population > 10 && countryData[0].Population < 100 ? [0, 10, 30, 50, 100]
-            : countryData[3].Population > 1 && countryData[0].Population < 10 ? [0, 1, 3, 5, 10]
+            ticks={countryData[5].Population > 500 ? [0, 500, 1000, 1500, 2000]
+            : countryData[5].Population > 100 && countryData[0].Population < 500 ? [0, 100, 200, 300, 500]
+            : countryData[5].Population > 10 && countryData[0].Population < 100 ? [0, 10, 30, 50, 100]
+            : countryData[5].Population > 1 && countryData[0].Population < 10 ? [0, 1, 3, 5, 10]
             : [0, 0.1, 0.3, 0.5, 1]} 
-            domain={countryData[3].Population > 500 ? [0, 2000]
-            : countryData[3].Population > 100 && countryData[0].Population < 500 ? [0, 500]
-            : countryData[3].Population > 10 && countryData[0].Population < 100 ? [0, 100]
-            : countryData[3].Population > 1 && countryData[0].Population < 10 ? [0, 10]
+            domain={countryData[5].Population > 500 ? [0, 2000]
+            : countryData[5].Population > 100 && countryData[0].Population < 500 ? [0, 500]
+            : countryData[5].Population > 10 && countryData[0].Population < 100 ? [0, 100]
+            : countryData[5].Population > 1 && countryData[0].Population < 10 ? [0, 10]
             : [0, 1]} 
           />
           <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
-            wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,lineHeight: 0.5}}/>
+            wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,lineHeight: 0.5, backgroundColor: 'white'}}/>
           <Line type="monotone" dataKey="Population" stroke="#5060E9" fill="#5060E9"/>
         </LineChart>
       </ResponsiveContainer>
