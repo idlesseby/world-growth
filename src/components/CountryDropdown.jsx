@@ -28,8 +28,8 @@ export default function CountryDropdown(props) {
   }
 
   return (
-    <Select className='content-dropdown' options={options} onChange={props.handleChange} 
-      defaultValue={{ value: "Germany", label: "Germany"}} styles={styles}
+    <Select className='content-dropdown' options={options} onChange={props.handleChange} onMenuOpen={props.disableTooltip}
+      onMenuClose={props.activateTooltip} defaultValue={{ value: "Germany", label: "Germany"}} styles={styles}
     />
   )
 }

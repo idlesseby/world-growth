@@ -7,8 +7,8 @@ import {
 import "./index.css";
 import Root from "./routes/root";
 import ErrorPage from "./error-page";
-import Timeline from "./routes/timeline";
 import GrowthRate from "./routes/growthrate";
+import Timeline from "./routes/timeline";
 import WorldPercentage from "./routes/worldpercentage";
 
 const router = createBrowserRouter([

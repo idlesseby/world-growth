@@ -2,6 +2,8 @@ import React from 'react'
 import data from '../data.js'
 import { BarChart, Bar, ResponsiveContainer, CartesianGrid, Tooltip, YAxis } from 'recharts'
 
+const toPercent = (decimal) => `${(decimal * 100).toFixed(0)}%`
+
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
@@ -26,11 +28,11 @@ export default function WorldPercentage() {
             top: 62,
             right: 50,
             left: 40,
-            bottom: 0
+            bottom: 20
           }}
         >
           <CartesianGrid vertical={false} />
-          <YAxis label={{ value: 'Population in %', angle: -90, position: 'left' }}/>
+          <YAxis label={{ value: 'World population in %', angle: -90, position: 'left' }} tickFormatter={toPercent}/>
           <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
           wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,lineHeight: 0.5, backgroundColor: 'white'}}/>
           <Bar dataKey="worldPercentage" fill="#5060E9" />
