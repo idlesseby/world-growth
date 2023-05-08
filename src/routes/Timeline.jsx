@@ -5,6 +5,7 @@ import CountryDropdown from '../components/CountryDropdown.jsx'
 
 export default function Timeline() {
 
+  let [noDropdownActive, setNoDropdownActive] = useState(true)
   let [selectedCountry, setSelectedCountry] = useState("Germany")
   let country = data.countries.filter(word => word.country === selectedCountry)
   let countryData = []
@@ -12,6 +13,14 @@ export default function Timeline() {
   const popCountYears = years.map(year => {
     return 'pop' + year
   })
+
+  function disableTooltip() {
+    setNoDropdownActive(false)
+  }
+
+  function activateTooltip() {
+    setNoDropdownActive(true)
+  }
 
   function handleChange(selectedOption) {
     setSelectedCountry(selectedOption.value)
@@ -32,8 +41,14 @@ export default function Timeline() {
         <div className="custom-tooltip">
           <p className="label">Year {`${label}`}</p>
           <p className="desc">Population:
-            {` ${(payload[0].value > 1 ? (payload[0].value).toFixed(1) : (payload[0].value * 1000).toFixed(1)) }`}
-            {payload[0].value > 1 ? ' million' : ' thousand'}
+            {` ${(payload[0].value > 1000 ? (payload[0].value * 0.001).toFixed(1)
+            : payload[0].value > 1 ? (payload[0].value).toFixed(1)
+            : payload[0].value > 0.001 ? (payload[0].value * 1000).toFixed(1)
+            : (payload[0].value * 1000000).toFixed(0))}`}
+            {payload[0].value > 1000 ? ' billion' 
+            : payload[0].value > 1 ? ' million' 
+            : payload[0].value > 0.001 ? ' thousand'
+            : ' hundred'}
           </p>
         </div>
       );
@@ -46,7 +61,7 @@ export default function Timeline() {
     <div className='container'>
       <div className='content-title'>Timeline:</div>
 
-      <CountryDropdown handleChange={handleChange}/>
+      <CountryDropdown handleChange={handleChange} disableTooltip={disableTooltip} activateTooltip={activateTooltip} />
 
       <ResponsiveContainer width="100%" height="70%">
         <LineChart data={countryData} 
@@ -74,9 +89,11 @@ export default function Timeline() {
             : countryData[5].Population > 1 && countryData[0].Population < 10 ? [0, 10]
             : [0, 1]} 
           />
-          <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
-            wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,lineHeight: 0.5, backgroundColor: 'white'}}/>
-          <Line type="monotone" dataKey="Population" stroke="#5060E9" fill="#5060E9"/>
+          {noDropdownActive && <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
+            wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,
+            lineHeight: 0.5, backgroundColor: 'white'}}
+          />}
+          <Line type="monotone" dataKey="Population" stroke="#5060E9" fill="#5060E9" isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>
