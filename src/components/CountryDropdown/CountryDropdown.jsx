@@ -1,6 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
-import data from '../data.js'
+import './CountryDropdown.css'
+import data from '../../data.js'
 
 export default function CountryDropdown(props) {
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import data from '../data.js'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import CountryDropdown from '../components/CountryDropdown.jsx'
+import CountryDropdown from '../components/CountryDropdown/CountryDropdown.jsx'
 
 export default function Timeline() {
 
-  let [noDropdownActive, setNoDropdownActive] = useState(true)
+  let [isDropdownActive, setIsDropdownActive] = useState(true)
   let [selectedCountry, setSelectedCountry] = useState("Germany")
   let country = data.countries.filter(word => word.country === selectedCountry)
   let countryData = []
@@ -15,11 +15,11 @@ export default function Timeline() {
   })
 
   function disableTooltip() {
-    setNoDropdownActive(false)
+    setIsDropdownActive(false)
   }
 
   function activateTooltip() {
-    setNoDropdownActive(true)
+    setIsDropdownActive(true)
   }
 
   function handleChange(selectedOption) {
@@ -60,10 +60,8 @@ export default function Timeline() {
   return <>
     <div className='container'>
       <div className='content-title'>Timeline:</div>
-
       <CountryDropdown handleChange={handleChange} disableTooltip={disableTooltip} activateTooltip={activateTooltip} />
-
-      <ResponsiveContainer width="100%" height="70%">
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart data={countryData} 
           margin={{
             top: 0,
@@ -72,10 +70,11 @@ export default function Timeline() {
             bottom: 0
           }}
         >
-          <CartesianGrid vertical={false} />
-          <XAxis dataKey="Year"/>
+          <CartesianGrid vertical={false} stroke='#999'/>
+          <XAxis dataKey="Year" stroke='#222'/>
           <YAxis 
             dataKey="x" 
+            stroke='#222'
             type='number' 
             label={{ value: 'Population in millions', angle: -90, position: 'left' }}
             ticks={countryData[5].Population > 500 ? [0, 500, 1000, 1500, 2000]
@@ -89,9 +88,8 @@ export default function Timeline() {
             : countryData[5].Population > 1 && countryData[0].Population < 10 ? [0, 10]
             : [0, 1]} 
           />
-          {noDropdownActive && <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
-            wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,
-            lineHeight: 0.5, backgroundColor: 'white'}}
+          {isDropdownActive && <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
+            wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "8px" , lineHeight: 1.25, backgroundColor: 'white'}}
           />}
           <Line type="monotone" dataKey="Population" stroke="#5060E9" fill="#5060E9" isAnimationActive={false} />
         </LineChart>

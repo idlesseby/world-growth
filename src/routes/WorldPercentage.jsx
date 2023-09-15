@@ -1,6 +1,6 @@
 import React from 'react'
 import data from '../data.js'
-import { BarChart, Bar, ResponsiveContainer, CartesianGrid, Tooltip, YAxis } from 'recharts'
+import { BarChart, Bar, ResponsiveContainer, CartesianGrid, Tooltip, YAxis, XAxis } from 'recharts'
 
 const toPercent = (decimal) => `${(decimal * 100).toFixed(0)}%`
 
@@ -21,8 +21,7 @@ export default function WorldPercentage() {
   return (
     <div className='container'>
       <div className='content-title'>World Percentage:</div>
-
-      <ResponsiveContainer width="100%" height="70%">
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data.countries}
           margin={{
             top: 62,
@@ -31,10 +30,11 @@ export default function WorldPercentage() {
             bottom: 20
           }}
         >
-          <CartesianGrid vertical={false} />
-          <YAxis label={{ value: 'World population in %', angle: -90, position: 'left' }} tickFormatter={toPercent}/>
+          <CartesianGrid vertical={false} stroke='#999'/>
+          <YAxis stroke='#222' label={{ value: 'World population in %', angle: -90, position: 'left' }} tickFormatter={toPercent}/>
+          <XAxis stroke='#222' tick={0}/>
           <Tooltip cursor={{ stroke: '#5060E9' }} content={<CustomTooltip />} 
-          wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "0.5rem" ,lineHeight: 0.5, backgroundColor: 'white'}}/>
+          wrapperStyle={{outline: "none", border: "1px solid #5060E9", padding: "8px" ,lineHeight: 1.25, backgroundColor: 'white'}}/>
           <Bar dataKey="worldPercentage" fill="#5060E9" />
         </BarChart>
       </ResponsiveContainer>

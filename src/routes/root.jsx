@@ -1,12 +1,12 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { MdTimeline, MdBarChart, MdPublic, MdOutlineLanguage } from "react-icons/md"
-import Header from "../components/Header";
+import { MdTimeline, MdBarChart, MdPublic, MdMultilineChart } from "react-icons/md"
+import Header from "../components/Header/Header";
 
 export default function Root() {
   return (
     <>
       <div id="sidebar">
-        <h1><MdOutlineLanguage/>World Growth</h1>
+        <h1><MdPublic/>World Growth</h1>
         <nav>
           <ul>
             <li>
@@ -36,14 +36,14 @@ export default function Root() {
                   className={({ isActive, isPending }) =>
                   isActive ? "active" : isPending ? "pending" : ""
                 }>
-                <MdPublic/>
+                <MdMultilineChart/>
                 World Percentage
               </NavLink>
             </li>
           </ul>
         </nav>
       </div>
-      <div id="detail">
+      <div id="content">
         <Header />
         <Outlet />
       </div>

@@ -1,0 +1,18 @@
+.header {
+  padding: 16px;
+  height: 80px;
+  border-bottom: solid 1px #C4C5D4;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header img {
+  width: 44px;
+  border-radius: 20px;
+  margin-right: 12px;
+}
+
+.header span {
+  font-size: 16px;
+}
